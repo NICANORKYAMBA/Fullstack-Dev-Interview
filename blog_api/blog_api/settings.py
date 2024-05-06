@@ -133,6 +133,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_API_ROOT_VIEW': 'api.views.api_root',
 }
 
 SIMPLE_JWT = {

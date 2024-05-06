@@ -1,8 +1,40 @@
 """ BlogPost views """
 from rest_framework import viewsets, permissions
+from rest_framework.views import APIView
+from rest_framework.schemas import openapi
+from rest_framework.response import Response
 from .models import BlogPost
 from .serielizers import BlogPostSerializer
 from .permissions import BlogPostPermission
+
+
+def api_root(request):
+    """
+    API root.
+
+    Args:
+        request (HttpRequest): The request object.
+
+    Returns:
+        Response: The response object with the welcome message.
+    """
+    info = openapi.get_api_root_as_dict(request.user)
+    info['message'] = 'Welcome to my Blog Post REST API!'
+    return Response(info)
+
+class WelcomeViewSet(APIView):
+    """ Welcome view """
+    def get(self, request):
+        """
+        Get the welcome message.
+
+        Args:
+            request (HttpRequest): The request object.
+
+        Returns:
+            Response: The response object with the welcome message.
+        """
+        return Response({'message': 'Welcome to my Blog Post REST API!'})
 
 
 class BlogPostViewSet(viewsets.ModelViewSet):
