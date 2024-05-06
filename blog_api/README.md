@@ -8,7 +8,7 @@ This API allows you to manage blog posts, including creating, retrieving, updati
 
 ### 2. Endpoints
 
-Here's a table summarizing the available API endpoints:
+Here's a table summarizing the available API endpoints
 
 | Endpoint                     | HTTP Method | Description                                                    | Authentication Required |
 |------------------------------|-------------|-----------------------------------------------------------------|-------------------------|
@@ -22,7 +22,7 @@ Here's a table summarizing the available API endpoints:
 | `/api/token/refresh/`         | POST         | Refreshes an expired authentication token.                       | Yes                      |
 
 
-**Note:**
+**Note**
 
 - `<int:pk>` represents the primary key (ID) of a specific blog post.
 
@@ -30,11 +30,11 @@ Here's a table summarizing the available API endpoints:
 
 The API uses token-based authentication (JSON Web Tokens - JWT). To perform actions that modify blog posts (create, update, delete), you need to obtain an authentication token and include it in the Authorization header of your requests.
 
-**3.1 Obtaining a Token:**
+**3.1 Obtaining a Token**
 
 Use the `/api/token/` endpoint with a POST request to generate a JWT token. You'll need to provide valid user credentials (username and password) in the request body.
 
-**Request Body:**
+**Request Body**
 
 ```json
 {
@@ -43,9 +43,9 @@ Use the `/api/token/` endpoint with a POST request to generate a JWT token. You'
 }
 ```
 
-**Response:**
+**Response**
 
-Upon successful login, the response will contain a JSON object with the following fields:
+Upon successful login, the response will contain a JSON object with the following fields
 
 ```json
 {
@@ -57,11 +57,11 @@ Upon successful login, the response will contain a JSON object with the followin
 - `access`: The access token used for subsequent authorized requests. Include it in the Authorization header with the `Bearer` scheme (e.g., `Authorization: Bearer access_token`). This token has a limited lifespan.
 - `refresh`: The refresh token used to obtain a new access token when the current one expires.
 
-**3.2 Refreshing an Expired Token:**
+**3.2 Refreshing an Expired Token**
 
 Use the `/api/token/refresh/` endpoint with a POST request to refresh an expired access token. Include the refresh token obtained during login in the request body.
 
-**Request Body:**
+**Request Body**
 
 ```json
 {
@@ -69,9 +69,9 @@ Use the `/api/token/refresh/` endpoint with a POST request to refresh an expired
 }
 ```
 
-**Response:**
+**Response**
 
-Upon successful refresh, the response will contain a new access token:
+Upon successful refresh, the response will contain a new access token
 
 ```json
 {
@@ -81,7 +81,7 @@ Upon successful refresh, the response will contain a new access token:
 
 ### 4. Request Formats
 
-The API accepts requests in JSON format. Here's an example of a JSON request body for creating a new blog post:
+The API accepts requests in JSON format. Here's an example of a JSON request body for creating a new blog post
 
 ```json
 {
@@ -92,9 +92,9 @@ The API accepts requests in JSON format. Here's an example of a JSON request bod
 
 ### 5. Response Structures
 
-The API responses are also in JSON format. The structure of the response depends on the endpoint and operation performed. Here are some examples:
+The API responses are also in JSON format. The structure of the response depends on the endpoint and operation performed. Here is an example
 
-**Retrieving a list of blog posts:**
+**Retrieving a list of blog posts**
 
 ```json
 [
@@ -109,9 +109,9 @@ The API responses are also in JSON format. The structure of the response depends
 ]
 ```
 
-**Error Handling:**
+**Error Handling**
 
-The API uses standard HTTP status codes to indicate success or failure. Here are some examples:
+The API uses standard HTTP status codes to indicate success or failure. Here are some examples
 
 - **200 OK:** Successful request.
 - **201 Created:** Resource created successfully (e.g., creating a new blog post).
