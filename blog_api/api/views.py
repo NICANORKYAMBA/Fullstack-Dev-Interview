@@ -1,10 +1,12 @@
 """ BlogPost views """
 from rest_framework import viewsets, permissions
+from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.schemas import openapi
 from rest_framework.response import Response
 from .models import BlogPost
-from .serielizers import BlogPostSerializer
+from .serielizers import BlogPostSerializer, UserSerializer
 from .permissions import BlogPostPermission
 
 
@@ -22,6 +24,7 @@ def api_root(request):
     info['message'] = 'Welcome to my Blog Post REST API!'
     return Response(info)
 
+
 class WelcomeViewSet(APIView):
     """ Welcome view """
     def get(self, request):
@@ -37,11 +40,17 @@ class WelcomeViewSet(APIView):
         return Response({'message': 'Welcome to my Blog Post REST API!'})
 
 
+class CreateUserView(CreateAPIView):
+    """ API endpoint that allows users to be created. """
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UserSerializer
+
+
 class BlogPostViewSet(viewsets.ModelViewSet):
     """ API endpoint that allows posts to be viewed or edited. """
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
-    permission_classes = [BlogPostPermission]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         """
