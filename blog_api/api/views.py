@@ -1,12 +1,13 @@
-""" BlogPost views """
-from rest_framework import viewsets, permissions
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import status, viewsets, permissions
 from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.schemas import openapi
 from rest_framework.response import Response
 from .models import BlogPost
-from .serielizers import BlogPostSerializer, UserSerializer
+from .serializers import BlogPostSerializer, UserSerializer
 from .permissions import BlogPostPermission
 
 
@@ -25,7 +26,7 @@ def api_root(request):
     return Response(info)
 
 
-class WelcomeViewSet(APIView):
+class WelcomeView(APIView):
     """ Welcome view """
     def get(self, request):
         """
@@ -64,7 +65,6 @@ class BlogPostViewSet(viewsets.ModelViewSet):
         """
         serializer.save(author=self.request.user)
 
-
     def perform_update(self, serializer):
         """
         Save the post when updating a blog post.
@@ -77,7 +77,6 @@ class BlogPostViewSet(viewsets.ModelViewSet):
         """
         serializer.save(author=self.request.user)
 
-
     def perform_destroy(self, instance):
         """
         Delete a blog post.
@@ -89,7 +88,6 @@ class BlogPostViewSet(viewsets.ModelViewSet):
             None
         """
         instance.delete()
-
 
     def destroy(self, request, pk=None):
         """
@@ -105,3 +103,33 @@ class BlogPostViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def list(self, request):
+        """
+        Retrieve a list of blog posts.
+
+        Args:
+            request (HttpRequest): The request object.
+
+        Returns:
+            Response: The response object with a list of serialized blog posts.
+        """
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """
+        Retrieve a single blog post.
+
+        Args:
+            request (HttpRequest): The request object.
+            pk (int): The primary key of the blog post.
+
+        Returns:
+            Response: The response object with a serialized blog post.
+        """
+        queryset = self.get_queryset()
+        instance = get_object_or_404(queryset, pk=pk)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
