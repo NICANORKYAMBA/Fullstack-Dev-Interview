@@ -7,7 +7,7 @@ Algorithm:
 2. Sort the two halves
 3. Merge the two sorted halves
 
-Since the division takes p;ace logarithmically(log n times),
+Since the division takes place logarithmically(log n times),
 and each merge takes linear time(n), the overall time complexity
 of merge sort is O(nlog n) * O(n) = O(nlogn).
 
@@ -15,4 +15,4 @@ Its efficiency is better than bubble sort, selection sort and insertion sort
 which have O(n^2) time complexity.
 When compared to Quick Sort, which also has O(nlogn) time complexity,
 merge sort is generally considered more stable since it preserves the
-original order of equal elements and has more predictable worst-case scenario
+original order of equal elements and has more predictable worst-case scenarios.
