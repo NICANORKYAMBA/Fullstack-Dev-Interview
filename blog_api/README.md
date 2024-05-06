@@ -38,8 +38,8 @@ Use the `/api/token/` endpoint with a POST request to generate a JWT token. You'
 
 ```json
 {
-  "username": "your_username",
-  "password": "your_password"
+  "username": "username",
+  "password": "password"
 }
 ```
 
@@ -49,12 +49,12 @@ Upon successful login, the response will contain a JSON object with the followin
 
 ```json
 {
-  "access": "your_access_token",
-  "refresh": "your_refresh_token"
+  "access": "access_token",
+  "refresh": "refresh_token"
 }
 ```
 
-- `access`: The access token used for subsequent authorized requests. Include it in the Authorization header with the `Bearer` scheme (e.g., `Authorization: Bearer your_access_token`). This token has a limited lifespan.
+- `access`: The access token used for subsequent authorized requests. Include it in the Authorization header with the `Bearer` scheme (e.g., `Authorization: Bearer access_token`). This token has a limited lifespan.
 - `refresh`: The refresh token used to obtain a new access token when the current one expires.
 
 **3.2 Refreshing an Expired Token:**
@@ -65,7 +65,7 @@ Use the `/api/token/refresh/` endpoint with a POST request to refresh an expired
 
 ```json
 {
-  "refresh": "your_refresh_token"
+  "refresh": "refresh_token"
 }
 ```
 
@@ -75,7 +75,7 @@ Upon successful refresh, the response will contain a new access token:
 
 ```json
 {
-  "access": "your_new_access_token"
+  "access": "new_access_token"
 }
 ```
 
