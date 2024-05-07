@@ -122,3 +122,62 @@ The API uses standard HTTP status codes to indicate success or failure. Here are
 - **500 Internal Server Error:** An unexpected error occurred on the server side.
 
 The error response body might include additional details about the specific error encountered.
+
+### 6. Running the Server
+
+To run the server and start using the Blog Post API, follow these steps:
+
+1. **Install Dependencies**
+Make sure you have all the required dependencies installed. You can install them using pip.
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Migrate Database**
+If you're using a database, run the migrations to apply any pending changes.
+
+   ```bash
+   python manage.py migrate
+   ```
+
+3. **Start the Server**
+Run the Django development server.
+
+   ```bash
+   python manage.py runserver
+   ```
+
+4. **Access the API**
+nce the server is running, you can access the API endpoints using your preferred HTTP client (e.g., cURL, Postman). Here are some example requests:
+
+   - **Get All Blog Posts**:
+     ```bash
+     curl -X GET http://localhost:8000/api/posts/
+     ```
+
+   - **Get a Single Blog Post** (replace `<post_id>` with the actual ID of the post):
+     ```bash
+     curl -X GET http://localhost:8000/api/posts/<post_id>/
+     ```
+
+   - **Create a New Blog Post**:
+     ```bash
+     curl -X POST -H "Content-Type: application/json" -d '{"title":"New Post","content":"This is the content of my new post."}' http://localhost:8000/api/posts/
+     ```
+
+   - **Update an Existing Blog Post** (replace `<post_id>` with the actual ID of the post):
+     ```bash
+     curl -X PUT -H "Content-Type: application/json" -d '{"title":"Updated Post","content":"This is the updated content of my post."}' http://localhost:8000/api/posts/<post_id>/
+     ```
+
+   - **Delete a Blog Post** (replace `<post_id>` with the actual ID of the post):
+     ```bash
+     curl -X DELETE http://localhost:8000/api/posts/<post_id>/
+     ```
+
+5. **Authentication**
+For endpoints that require authentication (e.g., creating, updating, deleting posts), obtain an authentication token by sending a POST request to `/api/token/` with valid user credentials. Use the obtained token in the `Authorization` header for subsequent requests.
+
+6. **Explore Other Endpoints**
+Feel free to explore other endpoints provided by the API, such as user registration (`/api/register/`) and token refresh (`/api/token/refresh/`).
