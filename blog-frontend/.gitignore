@@ -1,0 +1,10 @@
+node_modules/
+*.log
+*.swp
+*.swx
+*.swo
+*.pyc
+*.pyo
+
+.DS_Store
+.vscode

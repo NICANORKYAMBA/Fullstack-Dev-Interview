@@ -1,0 +1,12 @@
+<h2>Blog Posts</h2>
+<div *ngIf="posts.length === 0">Loading posts...</div>
+<ul *ngIf="posts.length > 0">
+  <li *ngFor="let post of posts">
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.content }}</p>
+  </li>
+</ul>
+
+<app-pagination (pageChange)="getPosts($event)"></app-pagination>
+<app-filtering (filtersChange)="filters = $event; getPosts()"></app-filtering>
+<app-sorting (sortChange)="sort = $event; getPosts()"></app-sorting>
